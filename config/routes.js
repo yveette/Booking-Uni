@@ -1,10 +1,11 @@
 const authController = require('../controllers/auth');
 const homeController = require('../controllers/home');
-// TODO add other controllers....
+const hotelController = require('../controllers/hotel');
 
 module.exports = (app) => {
     app.use(authController);
     app.use(homeController);
+    app.use(hotelController);
 
     // TODO add not found page
     app.get('*', (req, res) => {

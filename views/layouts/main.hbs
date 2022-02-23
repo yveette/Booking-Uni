@@ -27,19 +27,8 @@
             {{/if}}
         </div>
 
+        {{#if hasUser}}
         <nav>
-            <div class="left-container">
-                <ul>
-                    <li><a href="/">Home</a></li>
-                    <li><a href="/login">Login</a></li>
-                    <li><a href="/register">Register</a></li>
-                    <a href="/logout" class="log-out">Logout</a>
-                </ul>
-            </div>
-        </nav>
-
-
-        {{!-- <nav>
             <div class="left-container">
                 <ul>
                     <li><a href="/">Home</a></li>
@@ -47,10 +36,21 @@
                 </ul>
             </div>
             <div class="right-container">
-                <a href="" class="log-out">{{name}}</a>
+                <a href="/profile" class="log-out">{{user.username}}</a>
                 <a href="/logout" class="log-out">Logout</a>
             </div>
-        </nav> --}}
+        </nav>
+        {{else}}
+        <nav>
+            <div class="left-container">
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/login">Login</a></li>
+                    <li><a href="/register">Register</a></li>
+                </ul>
+            </div>
+        </nav>
+        {{/if}}
 
         {{{body}}}
 

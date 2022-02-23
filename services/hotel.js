@@ -68,6 +68,10 @@ async function deleteById(hotelId, userId) {
     // await User.findByIdAndDelete({ booked: hotelId });
 }
 
+async function getUserBooked(userId) {
+    const booked = await Hotel.find({ owner: userId }).lean();
+    return booked.map(p => p.hotel);
+}
 
 module.exports = {
     createHotel,
@@ -75,5 +79,6 @@ module.exports = {
     getHotelById,
     bookRoom,
     updateHotel,
-    deleteById
+    deleteById,
+    getUserBooked
 };

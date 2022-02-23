@@ -29,4 +29,16 @@ router.post('/create', isUser(), async (req, res) => {
     }
 });
 
+router.get('/details/:id', isUser(), preload(), (req, res) => {
+    const hotel = res.locals.data;
+
+    hotel.isOwner = req.session.user?._id == hotel.owner._id;
+
+    if (hotel.booked.some(u => u._id == req.session.user._id)) {
+        hotel.isBooked = true;
+    }
+
+    res.render('details', { title: 'Details Page', data: hotel });
+});
+
 module.exports = router;

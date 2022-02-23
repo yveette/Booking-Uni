@@ -1,0 +1,32 @@
+{{#with data}}
+<section id="viewhotelDetails">
+    <h2>Details</h2>
+    <div class="hotel-ticket">
+        <div class="hotel-left">
+            <img src="{{imgUrl}}" alt="img">
+        </div>
+        <div class="hotel-right">
+            <div>
+                <h3>{{hotel}}</h3>
+            </div>
+            <div>
+                {{city}}
+            </div>
+
+            {{#if isOwner}}
+            <a href="/edit/{{_id}}" class="edit">Edit</a>
+            <a href="/detelete/{{_id}}" class="remove">Delete</a>
+            {{else}}
+                {{#if isBooked}}
+            <p><span class="green">You already have booked a room</span> </p>
+                {{else}}
+                    {{#if rooms}}
+            <p><span>Free rooms: {{rooms}}</span> </p>
+            <a href="/book/{{_id}}" class="book">Book</a>
+                    {{/if}}
+                {{/if}}
+            {{/if}}
+        </div>
+    </div>
+</section>
+{{/with}}

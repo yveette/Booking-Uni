@@ -13,12 +13,18 @@ async function createHotel(hotel) {
 
 async function getAll() {
     //descending order by rooms
-    return Hotel.find({}).sort({rooms: -1}).lean();
+    return Hotel.find({}).sort({ rooms: -1 }).lean();
 }
+
+async function getHotelById(id) {
+    return Hotel.findById(id).lean();
+}
+
 
 //when delete => delete in offered id
 
 module.exports = {
     createHotel,
-    getAll
+    getAll,
+    getHotelById
 };

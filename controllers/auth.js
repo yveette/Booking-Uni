@@ -8,10 +8,15 @@ router.get('/register', isGuest(), (req, res) => {
     res.render('register');
 });
 
+const PASSWORD_PATTERN = /^[a-zA-Z0-9]+$/;
+
 router.post('/register', isGuest(), async (req, res) => {
     try {
-        if (req.body.password.trim().length < 4) {
-            throw new Error('Passwords should be at least 4 characters long!');
+        if (req.body.password.trim().length < 5) {
+            throw new Error('Password should be at least 5 characters long!');
+        }
+        if (!PASSWORD_PATTERN.test(req.body.password.trim())) {
+            throw new Error('Password should consist only english letters and digits!');
         }
         if (req.body.password != req.body.rePassword) {
             throw new Error('Passwords don\'t match!');

@@ -1,14 +1,16 @@
 const { Schema, model, Types: { ObjectId } } = require('mongoose');
 
-// TODO change user model
-// TODO add validation
-
-// const URL_PATTERN = /^https?:\/\/(.+)/;
-// const NAME_PATTERN = /^[a-zA-Z]+$/;
-// const EMAIL_PATTERN = /^([a-zA-Z]+)@([a-zA-Z]+)\.([a-zA-Z]+)$/;
+const EMAIL_PATTERN = /^([a-zA-Z0-9]+)@([a-zA-Z0-9]+)\.([a-zA-Z]+)$/;
 
 const userSchema = new Schema({
-    email: { type: String, required: true },
+    email: {
+        type: String, required: [true, 'Email is required!'], validate: {
+            validator(value) {
+                return EMAIL_PATTERN.test(value);
+            },
+            message: 'Email must be valid!'
+        }
+    },
     username: { type: String, required: true },
     hashedPassword: { type: String, required: true },
     booked: { type: [ObjectId], ref: 'Hotel', default: [] },

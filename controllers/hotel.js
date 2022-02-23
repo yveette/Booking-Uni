@@ -2,7 +2,7 @@ const router = require('express').Router();
 
 const { isUser, isOwner } = require('../middleware/guards');
 const preload = require('../middleware/preload');
-const { createHotel } = require('../services/hotel');
+const { createHotel, bookRoom } = require('../services/hotel');
 const mapErrors = require('../util/mappers');
 
 
@@ -39,6 +39,18 @@ router.get('/details/:id', isUser(), preload(), (req, res) => {
     }
 
     res.render('details', { title: 'Details Page', data: hotel });
+});
+
+router.get('/book/:id', isUser(), async (req, res) => {
+    const id = req.params.id;
+
+    try {
+        await bookRoom(id, req.session.user._id);
+    } catch (err) {
+        console.error(err);
+    } finally {
+        res.redirect('/details/' + id);
+    }
 });
 
 module.exports = router;

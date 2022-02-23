@@ -27,7 +27,9 @@ async function bookRoom(hotelId, userId) {
         throw new Error('User is already booked a room!');
     }
 
-    if (hotel.rooms -= 1 < 1) {
+    let rooms = hotel.rooms;
+    rooms -= 1;
+    if (rooms < 1) {
         throw new Error('There are no rooms left to book!');
     }
 
@@ -41,12 +43,37 @@ async function bookRoom(hotelId, userId) {
     await user.save();
 }
 
+async function updateHotel(id, hotel) {
+    const existing = await Hotel.findById(id);
 
-//when delete => delete in offered id
+    existing.hotel = hotel.hotel;
+    existing.city = hotel.city;
+    existing.rooms = hotel.rooms;
+    existing.imgUrl = hotel.imgUrl;
+
+    await existing.save();
+}
+
+async function deleteById(hotelId, userId) {
+    //delete id of a hotel to user booked collection
+    //when delete => delete in offered id
+
+    const user = await User.findById(userId);
+    user.offered = user.offered.filter(u => u != hotelId);
+
+    await user.save();
+
+    await Hotel.findByIdAndDelete(hotelId);
+    // TODO delete booked
+    // await User.findByIdAndDelete({ booked: hotelId });
+}
+
 
 module.exports = {
     createHotel,
     getAll,
     getHotelById,
-    bookRoom
+    bookRoom,
+    updateHotel,
+    deleteById
 };

@@ -2,7 +2,7 @@ const router = require('express').Router();
 
 const { isUser, isOwner } = require('../middleware/guards');
 const preload = require('../middleware/preload');
-const { createHotel, bookRoom } = require('../services/hotel');
+const { createHotel, bookRoom, updateHotel, deleteById } = require('../services/hotel');
 const mapErrors = require('../util/mappers');
 
 
@@ -51,6 +51,36 @@ router.get('/book/:id', isUser(), async (req, res) => {
     } finally {
         res.redirect('/details/' + id);
     }
+});
+
+router.get('/edit/:id', preload(), isOwner(), (req, res) => {
+    res.render('edit', { title: 'Edit Page' });
+});
+
+router.post('/edit/:id', preload(), isOwner(), async (req, res) => {
+    const id = req.params.id;
+
+    const hotel = {
+        hotel: req.body.hotel,
+        city: req.body.city,
+        rooms: req.body.rooms,
+        imgUrl: req.body.imgUrl,
+    };
+
+    try {
+        await updateHotel(id, hotel);
+        res.redirect('/details/' + id);
+    } catch (err) {
+        console.error(err);
+        const errors = mapErrors(err);
+        hotel._id = id;
+        res.render('edit', { title: 'Edit Page', data: hotel, errors });
+    }
+});
+
+router.get('/delete/:id', preload(), isOwner(), async (req, res) => {
+    await deleteById(req.params.id, req.session.user._id );
+    res.redirect('/');
 });
 
 module.exports = router;

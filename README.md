@@ -1,6 +1,6 @@
 # Booking Uni
 
-## SoftUni - JS Back-end - Exam 2020
+### SoftUni - JS Back-end - Exam 2020
 
 ## Used:
 
@@ -28,7 +28,7 @@
 
 ## Database Models
 
-# User
+### User
 
 - Email - string (required), unique,
 - Username – string (required), unique,
@@ -36,7 +36,7 @@
 - Booked hotels - a collection of Hotels the user have booked already,
 - Offered Hotels – a collection of Hotels the user offers
 
-# Hotel
+### Hotel
 
 - Name - string (required), unique
 - City - string (required),
@@ -47,15 +47,15 @@
 
 ## Application Pages
 
-# Home Page(Logged Out User)
+### Home Page(Logged Out User)
 
 List the **hotels ordered by the count of free rooms** (free rooms are the rooms at the current time, not by hotel creation) in descending order.
 If the user is NOT logged in by clicking on the hotels picture should be redirected to Login page.
 
-![Home Page](https://github.com/yveette/Booking-Uni/readme_files/home_page.png)
+![Home Page](https://github.com/yveette/Booking-Uni/blob/main/readme_files/home_page.png)
 
 If there are NO hotels in the database yet, display "There are no hotels found…"
 
-![Home Page](https://github.com/yveette/Booking-Uni/readme_files/home_page_not_found.png)
+![Home Page](https://github.com/yveette/Booking-Uni/blob/main/readme_files/home_page_not_found.png)
 
-# Register Page (Logged Out User)  
+### Register Page (Logged Out User)  

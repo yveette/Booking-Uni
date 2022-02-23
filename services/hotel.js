@@ -12,7 +12,8 @@ async function createHotel(hotel) {
 }
 
 async function getAll() {
-    return Hotel.find({}).lean();
+    //descending order by rooms
+    return Hotel.find({}).sort({rooms: -1}).lean();
 }
 
 //when delete => delete in offered id

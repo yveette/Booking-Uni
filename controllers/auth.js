@@ -5,7 +5,7 @@ const mapErrors = require('../util/mappers');
 const router = require('express').Router();
 
 router.get('/register', isGuest(), (req, res) => {
-    res.render('register');
+    res.render('register', { title: 'Register' });
 });
 
 const PASSWORD_PATTERN = /^[a-zA-Z0-9]+$/;
@@ -27,12 +27,12 @@ router.post('/register', isGuest(), async (req, res) => {
     } catch (err) {
         console.error(err);
         const errors = mapErrors(err);
-        res.render('register', { data: { username: req.body.username, email: req.body.email }, errors });
+        res.render('register', { data: { username: req.body.username, email: req.body.email }, errors, title: 'Register' });
     }
 });
 
 router.get('/login', isGuest(), (req, res) => {
-    res.render('login');
+    res.render('login', { title: 'Login' });
 });
 
 router.post('/login', isGuest(), async (req, res) => {
@@ -43,7 +43,7 @@ router.post('/login', isGuest(), async (req, res) => {
     } catch (err) {
         console.error(err);
         const errors = mapErrors(err);
-        res.render('login', { data: { username: req.body.username }, errors });
+        res.render('login', { data: { username: req.body.username }, errors, title: 'Login' });
     }
 });
 

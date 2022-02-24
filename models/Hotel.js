@@ -14,7 +14,9 @@ const hotelSchema = new Schema({
         minlength: [3, 'City should be at least 4 characters!']
     },
     rooms: {
-        type: Number, min: [1, 'The number of free rooms should be between 1 and 100'],
+        type: Number,
+        required: [true, 'Rooms are required!'],
+        min: [1, 'The number of free rooms should be between 1 and 100'],
         max: [100, 'The number of free rooms should be between 1 and 100']
     },
     imgUrl: {

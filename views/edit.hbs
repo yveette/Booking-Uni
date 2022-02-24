@@ -10,6 +10,11 @@
         <input type="number" id="free-rooms" name="rooms" value="{{rooms}}">
         <label for="imgUrl">Image:</label>
         <input type="text" id="imgUrl" name="imgUrl" value="{{imgUrl}}">
+
+        <label for="imgUrl">Air conditioning:</label>
+        <input type="checkbox" class="form-check-input" id="check-box" name="airCondition" 
+        {{#if airCondition}} checked {{else}} {{/if}}>
+
         <input type="submit" class="create" value="Add">
     </form>
 </section>

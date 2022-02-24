@@ -11,12 +11,21 @@ router.get('/create', isUser(), (req, res) => {
 });
 
 router.post('/create', isUser(), async (req, res) => {
+
+    let airCondition = '';
+    if (req.body.airCondition == 'on') {
+        airCondition = true;
+    } else {
+        airCondition = false;
+    }
+
     const hotel = {
         hotel: req.body.hotel,
         city: req.body.city,
         rooms: req.body.rooms,
         imgUrl: req.body.imgUrl,
-        owner: req.session.user._id
+        owner: req.session.user._id,
+        airCondition: airCondition
     };
 
     try {
@@ -60,11 +69,19 @@ router.get('/edit/:id', preload(), isOwner(), (req, res) => {
 router.post('/edit/:id', preload(), isOwner(), async (req, res) => {
     const id = req.params.id;
 
+    let airCondition = '';
+    if (req.body.airCondition == 'on') {
+        airCondition = true;
+    } else {
+        airCondition = false;
+    }
+
     const hotel = {
         hotel: req.body.hotel,
         city: req.body.city,
         rooms: req.body.rooms,
         imgUrl: req.body.imgUrl,
+        airCondition: airCondition
     };
 
     try {

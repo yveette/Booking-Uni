@@ -50,6 +50,7 @@ async function updateHotel(id, hotel) {
     existing.city = hotel.city;
     existing.rooms = hotel.rooms;
     existing.imgUrl = hotel.imgUrl;
+    existing.airCondition = hotel.airCondition;
 
     await existing.save();
 }

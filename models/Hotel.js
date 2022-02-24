@@ -27,6 +27,7 @@ const hotelSchema = new Schema({
             message: 'Image Url should be starts with http:// or https://'
         }
     },
+    airCondition: { type: Boolean, default: false },
     owner: { type: ObjectId, ref: 'User', required: true },
     booked: { type: [ObjectId], ref: 'User', default: [] },
 });

@@ -55,17 +55,19 @@ async function updateHotel(id, hotel) {
 }
 
 async function deleteById(hotelId, userId) {
-    //delete id of a hotel to user booked collection
-    //when delete => delete in offered id
-
     const user = await User.findById(userId);
     user.offered = user.offered.filter(u => u != hotelId);
-
     await user.save();
+    
+    //delete id of a hotel to user booked collection
+    //when delete => delete in offered id
+    const whoBooked = await User.find({ booked: hotelId });
+    await whoBooked.forEach(user => {
+        user.booked = user.booked.filter(u => u != hotelId);
+        user.save();
+    });
 
     await Hotel.findByIdAndDelete(hotelId);
-    // TODO delete booked
-    // await User.findByIdAndDelete({ booked: hotelId });
 }
 
 async function getUserBooked(userId) {
